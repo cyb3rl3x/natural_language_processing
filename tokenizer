@@ -1,0 +1,34 @@
+from nltk.corpus import stopwords 
+from nltk.tokenize import word_tokenize 
+from nltk.tokenize import RegexpTokenizer
+from nltk.text import Text
+
+content = "Vingadores - Ultimato quebra a bolsa de NY."
+
+tokenizer = RegexpTokenizer(r'\w+')
+
+#sem pontuação
+word_tokens = tokenizer.tokenize(content)
+
+#com pontuação
+content_tokens = word_tokenize(content) 
+
+#lista de stop words em português
+stop_words = set(stopwords.words('portuguese')) 
+
+#remove as stop words
+filtered_content = [w for w in word_tokens if not w in stop_words] 
+
+#modo alternativo de remover stop words
+filtered_sentence = [] 
+for w in word_tokens: 
+	if w not in stop_words: 
+		filtered_sentence.append(w) 
+
+
+print('Conteúdo = ',content) 
+print('Conteúdo filtrado = ',filtered_content) 
+
+content_nltk = Text(word_tokenize(content))
+
+print('Conteúdo similar= ',content_nltk.similar('a')) 
